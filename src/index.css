@@ -2,9 +2,9 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "open sans", sans-serif;
-  justify-content: center;
+  font-family: "Open Sans", sans-serif;
 }
+
 html,
 body,
 #root {

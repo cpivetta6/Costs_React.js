@@ -2,7 +2,7 @@ import styles from "./ProjectForm.module.css";
 import Input from "../form/Input";
 import Select from "../form/Select";
 import SubmitButton from "../form/SubmitButton";
-import { useEffect, useState, userState } from "react";
+import { useEffect, useState } from "react";
 
 function ProjectForm({ handleSubmit, btnText, projectData }) {
   const [categories, setCategories] = useState([]);
@@ -23,13 +23,15 @@ function ProjectForm({ handleSubmit, btnText, projectData }) {
   }, []);
 
   const submit = (e) => {
-    e.preventDefaut();
+    e.preventDefault();
+
     handleSubmit(project);
+    //console.log(project);
   };
 
   function handleChange(e) {
     setProject({ ...project, [e.target.name]: e.target.value });
-    console.log(project);
+    //console.log(project);
   }
 
   function handleCategory(e) {
@@ -37,7 +39,7 @@ function ProjectForm({ handleSubmit, btnText, projectData }) {
       ...project,
       category: {
         id: e.target.value,
-        name: e.target.options[e.target.seletedIndex].text,
+        name: e.target.options[e.target.selectedIndex].text,
       },
     });
   }
@@ -50,19 +52,24 @@ function ProjectForm({ handleSubmit, btnText, projectData }) {
         name="name"
         placeholder="Insert the project name"
         handleOnChange={handleChange}
+        value={project.name}
       />
 
       <Input
         type="number"
-        text="budget"
-        name="total"
+        text="Project budget"
+        name="budget"
         placeholder="Insert the budget"
         handleOnChange={handleChange}
+        value={project.budget}
       />
+
       <Select
         name="category_id"
         text="Select the category"
         options={categories}
+        handleOnChange={handleCategory}
+        value={project.category ? project.category.id : ""}
       />
       <SubmitButton text={btnText} />
     </form>
